@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catajoma | Productos de Belleza & Cosméticos</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            200: '#fbcfe8',
+                            300: '#f472b6',
+                            400: '#e879f9',
+                            500: '#ec4899',
+                            600: '#db2777',
+                            700: '#be185d',
+                            800: '#9d174d',
+                            900: '#831843',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Animación suave para badge online */
+        @keyframes pulse-subtle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.85; transform: scale(1.05); }
+        }
+        .pulse-online { animation: pulse-subtle 2s infinite ease-in-out; }
+        
+        /* Personalización de barra de desplazamiento del carrito */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #f472b6; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #db2777; }
+        
+        /* Efecto Glassmorphism */
+        .glass-header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="bg-rose-50/30 text-gray-800 antialiased selection:bg-brand-200 selection:text-brand-900">
+
+    <!-- Header principal -->
+    <header class="sticky top-0 z-40 w-full glass-header border-b border-rose-100 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo Marca -->
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-500 to-rose-300 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-sparkles text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-brand-700 to-brand-500 capitalize">
+                        Catajoma
+                    </span>
+                    <span class="block text-[10px] font-bold tracking-widest text-brand-600 uppercase">Beauty Store</span>
+                </div>
+            </a>
+
+            <!-- Menú de navegación desktop -->
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-gray-600">
+                <a href="#inicio" class="hover:text-brand-600 transition-colors">Inicio</a>
+                <a href="#catalogo" class="hover:text-brand-600 transition-colors">Catálogo</a>
+                <a href="#beneficios" class="hover:text-brand-600 transition-colors">Beneficios</a>
+                <a href="#ubicacion" class="hover:text-brand-600 transition-colors">Ubicación</a>
+            </nav>
+
+            <!-- Acciones Header (Carrito) -->
+            <div class="flex items-center gap-4">
+                <button id="cart-icon-btn" onclick="toggleCart(true)" class="relative p-2.5 rounded-full bg-brand-100 text-brand-700 hover:bg-brand-200 transition-all focus:outline-none focus:ring-2 focus:ring-brand-400" aria-label="Ver carrito">
+                    <i class="fa-solid fa-bag-shopping text-xl"></i>
+                    <span id="cart-badge-count" class="absolute -top-1 -right-1 bg-brand-600 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white shadow-sm transition-transform scale-0">
+                        0
+                    </span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="inicio" class="relative overflow-hidden bg-gradient-to-b from-rose-100/60 via-brand-50/20 to-transparent py-12 lg:py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Texto Hero (CRO) -->
+                    <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-100 border border-brand-200 text-brand-700 text-xs font-semibold uppercase tracking-wider">
+                            <i class="fa-solid fa-heart text-brand-500"></i> Belleza & Cuidado Personal
+                        </div>
+                        
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight">
+                            Realza tu belleza natural con <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-rose-400">Catajoma</span>
+                        </h1>
+                        
+                        <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto lg:mx-0 font-normal">
+                            Descubre nuestra selección exclusiva de labiales, glosses y perfumes diseñados para destacar tu elegancia todos los días. Envíos directos con pedido rápido por WhatsApp.
+                        </p>
+                        
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                            <a href="#catalogo" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-brand-600 to-brand-500 text-white font-bold text-base shadow-lg shadow-brand-500/30 hover:shadow-brand-500/50 hover:-translate-y-0.5 transition-all text-center">
+                                Ver Catálogo de Productos <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                            </a>
+                            <a href="#ubicacion" class="w-full sm:w-auto px-6 py-4 rounded-xl bg-white border border-gray-200 text-gray-700 font-semibold hover:bg-gray-50 transition-all text-center shadow-sm">
+                                <i class="fa-solid fa-location-dot text-brand-500 mr-2"></i> Nuestra Tienda
+                            </a>
+                        </div>
+
+                        <!-- Micro-prueba social -->
+                        <div class="pt-4 flex items-center justify-center lg:justify-start gap-6 text-xs font-medium text-gray-500">
+                            <span class="flex items-center gap-1.5">
+                                <i class="fa-solid fa-check-circle text-emerald-500 text-sm"></i> Productos 100% Originales
+                            </span>
+                            <span class="flex items-center gap-1.5">
+                                <i class="fa-solid fa-truck-fast text-brand-500 text-sm"></i> Entregas Rápidas
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Galería / Banner Visual Hero -->
+                    <div class="lg:col-span-5 relative">
+                        <div class="relative mx-auto max-w-md lg:max-w-none">
+                            <div class="absolute -top-4 -left-4 w-72 h-72 bg-brand-300 rounded-full mix-blend-multiply filter blur-2xl opacity-40 animate-blob"></div>
+                            <div class="absolute -bottom-4 -right-4 w-72 h-72 bg-rose-300 rounded-full mix-blend-multiply filter blur-2xl opacity-40 animate-blob animation-delay-2000"></div>
+                            
+                            <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-white">
+                                <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80" 
+                                     alt="Productos de Belleza Catajoma" 
+                                     class="w-full h-96 object-cover hover:scale-105 transition-transform duration-700">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-6">
+                                    <div class="text-white">
+                                        <p class="text-xs uppercase font-bold tracking-widest text-brand-300">Colección Especial</p>
+                                        <p class="text-xl font-bold">Resalta tu brillo único</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Barra de Beneficios -->
+        <section id="beneficios" class="py-10 bg-white border-y border-rose-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <div class="flex items-center gap-4 p-4 rounded-2xl bg-rose-50/50 border border-rose-100">
+                        <div class="w-12 h-12 rounded-xl bg-brand-600 text-white flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 text-sm">Garantía de Calidad</h3>
+                            <p class="text-xs text-gray-500 mt-0.5">Cosméticos seleccionados con los más altos estándares.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 p-4 rounded-2xl bg-rose-50/50 border border-rose-100">
+                        <div class="w-12 h-12 rounded-xl bg-brand-600 text-white flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 text-sm">Pedido Directo por WhatsApp</h3>
+                            <p class="text-xs text-gray-500 mt-0.5">Sin registros molestos, compra en un solo clic.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 p-4 rounded-2xl bg-rose-50/50 border border-rose-100">
+                        <div class="w-12 h-12 rounded-xl bg-brand-600 text-white flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-sparkles"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 text-sm">Precios Accesibles</h3>
+                            <p class="text-xs text-gray-500 mt-0.5">Luce increíble con las mejores ofertas del mercado.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Catálogo de Productos -->
+        <section id="catalogo" class="py-16 bg-rose-50/20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="text-xs font-extrabold text-brand-600 uppercase tracking-widest bg-brand-100 px-3 py-1 rounded-full">Nuestros Favoritos</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-3">Catálogo Destacado</h2>
+                    <p class="text-gray-600 text-sm mt-2">Agrega tus cosméticos al carrito y finaliza tu orden directamente en nuestro WhatsApp.</p>
+                </div>
+
+                <!-- Grid de Productos -->
+                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Los productos se inyectan dinámicamente mediante JS -->
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Ubicación y Contacto -->
+        <section id="ubicacion" class="py-16 bg-white border-t border-rose-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-gradient-to-r from-brand-900 to-rose-900 rounded-3xl p-8 sm:p-12 text-white shadow-xl relative overflow-hidden">
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center relative z-10">
+                        <div class="space-y-4">
+                            <span class="inline-block px-3 py-1 rounded-full bg-brand-800/80 text-brand-200 text-xs font-semibold">Visítanos</span>
+                            <h2 class="text-3xl sm:text-4xl font-black">¿Dónde encontrar Catajoma?</h2>
+                            <p class="text-rose-100/90 text-sm leading-relaxed">
+                                Encuentra tu punto de belleza más cercano o solicita tus productos para entrega inmediata en tu ubicación.
+                            </p>
+                            
+                            <div class="space-y-3 pt-2 text-sm">
+                                <div class="flex items-start gap-3">
+                                    <i class="fa-solid fa-location-dot text-brand-300 mt-1"></i>
+                                    <div>
+                                        <p class="font-bold">Dirección Física:</p>
+                                        <a href="https://maps.app.goo.gl/cbkfGcFUqtDbuNmc9" target="_blank" rel="noopener noreferrer" class="text-brand-200 underline hover:text-white transition-colors">
+                                            Ver ubicación oficial en Google Maps
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-brands fa-whatsapp text-brand-300"></i>
+                                    <div>
+                                        <p class="font-bold">Atención por WhatsApp:</p>
+                                        <p class="text-rose-100">+51 967 983 926</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pt-4">
+                                <a href="https://maps.app.goo.gl/cbkfGcFUqtDbuNmc9" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-brand-900 font-bold hover:bg-rose-50 transition-colors shadow-md">
+                                    <i class="fa-solid fa-map-location-dot text-brand-600"></i> Abrir en Google Maps
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Card de Atención rápida -->
+                        <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 text-center space-y-4">
+                            <div class="w-16 h-16 rounded-full bg-emerald-500 text-white flex items-center justify-center text-3xl mx-auto shadow-lg">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">¿Tienes preguntas sobre un producto?</h3>
+                            <p class="text-xs text-rose-100">Haz clic en nuestro botón flotante o contáctanos de inmediato. Te asesoramos de manera personalizada.</p>
+                            <a href="https://wa.me/51967983926?text=Hola%20Catajoma,%20tengo%20una%20consulta%20sobre%20sus%20productos%20de%20belleza" target="_blank" class="inline-block w-full py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold transition-colors">
+                                Chatear con una Asesora
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center text-white font-bold">
+                        C
+                    </div>
+                    <span class="text-xl font-bold text-white tracking-tight">Catajoma</span>
+                </div>
+
+                <div class="text-xs text-center md:text-right space-y-1">
+                    <p>&copy; 2026 Catajoma Beauty Store. Todos los derechos reservados.</p>
+                    <p class="text-gray-500">Diseño optimizado para conversión y ventas directas por WhatsApp.</p>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal / Drawer del Carrito -->
+    <div id="cart-drawer-overlay" onclick="toggleCart(false)" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+    
+    <aside id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-96 bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 ease-out flex flex-col">
+        
+        <!-- Header del Carrito -->
+        <div class="p-5 border-b border-gray-100 flex items-center justify-between bg-rose-50/50">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-bag-shopping text-brand-600 text-lg"></i>
+                <h2 class="font-bold text-gray-900 text-lg">Tu Pedido</h2>
+                <span id="cart-item-count-label" class="text-xs bg-brand-200 text-brand-800 px-2 py-0.5 rounded-full font-bold">0 ítems</span>
+            </div>
+            <button onclick="toggleCart(false)" class="p-2 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100 transition-colors" aria-label="Cerrar carrito">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Lista de Productos en Carrito -->
+        <div id="cart-items-container" class="flex-1 overflow-y-auto p-5 space-y-4">
+            <!-- Items agregados por JS -->
+        </div>
+
+        <!-- Footer del Carrito con Checkout -->
+        <div class="p-5 border-t border-gray-100 bg-gray-50/50 space-y-4">
+            
+            <!-- Resumen de Costos -->
+            <div class="space-y-2 text-sm">
+                <div class="flex justify-between text-gray-500">
+                    <span>Subtotal:</span>
+                    <span id="cart-subtotal" class="font-medium text-gray-800">0.00 Bs.</span>
+                </div>
+                <div class="flex justify-between text-base font-extrabold text-gray-900 border-t border-gray-200 pt-2">
+                    <span>Total Final:</span>
+                    <span id="cart-total" class="text-brand-600">0.00 Bs.</span>
+                </div>
+            </div>
+
+            <!-- Datos adicionales opcionales para personalizar el pedido -->
+            <div class="space-y-2 pt-1">
+                <input type="text" id="customer-name" placeholder="Tu Nombre completo (Opcional)" class="w-full text-xs px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-400">
+                <input type="text" id="customer-notes" placeholder="Nota o Dirección de envío (Opcional)" class="w-full text-xs px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-400">
+            </div>
+
+            <!-- Botón CTA Finalizar Pedido por WhatsApp -->
+            <button onclick="checkoutWhatsApp()" class="w-full py-3.5 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white font-extrabold flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 transition-all text-sm">
+                <i class="fa-brands fa-whatsapp text-lg"></i>
+                <span>Finalizar Pedido por WhatsApp</span>
+            </button>
+            
+            <p class="text-[11px] text-center text-gray-400">
+                <i class="fa-solid fa-lock text-[10px]"></i> Serás redirigido a WhatsApp para confirmar tu pedido directamente con la tienda.
+            </p>
+        </div>
+    </aside>
+
+    <!-- Botón Flotante de WhatsApp con Badge Online Permanente (CRO) -->
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2">
+        
+        <!-- Mensaje / Badge de Estado "Online" -->
+        <div class="bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-lg border border-emerald-100 flex items-center gap-2 text-xs font-semibold text-gray-700 pulse-online">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 -ml-4.5"></span>
+            <span>• Online (Atención inmediata)</span>
+        </div>
+
+        <!-- Botón CTA Flotante -->
+        <a href="https://wa.me/51967983926?text=¡Hola%20Catajoma!%20Estoy%20visitando%20su%20tienda%20online%20y%20me%20gustaría%20recibir%20atención." 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="w-14 h-14 rounded-full bg-emerald-500 text-white flex items-center justify-center text-3xl shadow-2xl hover:bg-emerald-600 hover:scale-110 active:scale-95 transition-all duration-300 focus:outline-none"
+           aria-label="Contactar por WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Toast Notification (Reemplazo de alert()) -->
+    <div id="toast" class="fixed top-24 right-4 z-50 transform translate-x-72 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-gray-900 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-sm border border-gray-700">
+            <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400"></i>
+            <span id="toast-message">Producto agregado al carrito</span>
+        </div>
+    </div>
+
+    <!-- Scripts de la Aplicación -->
+    <script>
+        /* Datos de los Productos de Catajoma */
+        const products = [
+            {
+                id: 'p1',
+                name: 'Labiales Velvet Premium',
+                category: 'Labios',
+                price: 15,
+                unit: 'Bs.',
+                image: 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=600&q=80',
+                description: 'Larga duración, acabado mate suave e hidratación profunda.'
+            },
+            {
+                id: 'p2',
+                name: 'Gloss Brillante Hidratante',
+                category: 'Labios',
+                price: 15,
+                unit: 'Bs.',
+                image: 'https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?auto=format&fit=crop&w=600&q=80',
+                description: 'Brillo deslumbrante no pegajoso con extractos nutritivos.'
+            },
+            {
+                id: 'p3',
+                name: 'Perfumes Exclusivos Catajoma',
+                category: 'Fragancias',
+                price: 25,
+                unit: 'Bs.',
+                image: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=600&q=80',
+                description: 'Aroma sofisticado y duradero ideal para cualquier ocasión.'
+            }
+        ];
+
+        /* Estado del Carrito */
+        let cart = [];
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            loadCartFromStorage();
+            updateCartUI();
+        });
+
+        // Renderiza las cards de productos
+        function renderProducts() {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-rose-100/60 flex flex-col group';
+                
+                card.innerHTML = `
+                    <div class="relative overflow-hidden aspect-square bg-gray-100">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-brand-800 text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                            ${product.category}
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <div>
+                            <h3 class="font-bold text-gray-900 text-lg group-hover:text-brand-600 transition-colors">${product.name}</h3>
+                            <p class="text-gray-500 text-xs mt-1 leading-relaxed">${product.description}</p>
+                        </div>
+                        <div class="flex items-center justify-between pt-2 border-t border-rose-50">
+                            <div>
+                                <span class="text-2xl font-black text-gray-900">${product.price}</span>
+                                <span class="text-xs font-bold text-brand-600 ml-0.5">${product.unit}</span>
+                            </div>
+                            <button onclick="addToCart('${product.id}')" class="px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-95 text-white font-bold text-xs flex items-center gap-1.5 shadow-md shadow-brand-500/20 transition-all">
+                                <i class="fa-solid fa-plus text-xs"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const existingIndex = cart.findIndex(item => item.id === productId);
+            if (existingIndex > -1) {
+                cart[existingIndex].qty += 1;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+
+            saveCartToStorage();
+            updateCartUI();
+            showToast(`¡${product.name} agregado al carrito!`);
+            toggleCart(true); // Despliega el carrito automáticamente
+        }
+
+        function updateQty(productId, delta) {
+            const index = cart.findIndex(item => item.id === productId);
+            if (index > -1) {
+                cart[index].qty += delta;
+                if (cart[index].qty <= 0) {
+                    cart.splice(index, 1);
+                }
+            }
+            saveCartToStorage();
+            updateCartUI();
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            saveCartToStorage();
+            updateCartUI();
+            showToast('Producto eliminado del carrito', 'info');
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items-container');
+            const badgeCount = document.getElementById('cart-badge-count');
+            const itemCountLabel = document.getElementById('cart-item-count-label');
+            const subtotalEl = document.getElementById('cart-subtotal');
+            const totalEl = document.getElementById('cart-total');
+
+            // Calcular total de unidades y precio
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            // Actualizar Badge en Header
+            badgeCount.innerText = totalItems;
+            if (totalItems > 0) {
+                badgeCount.classList.remove('scale-0');
+                badgeCount.classList.add('scale-100');
+            } else {
+                badgeCount.classList.remove('scale-100');
+                badgeCount.classList.add('scale-0');
+            }
+
+            itemCountLabel.innerText = `${totalItems} ${totalItems === 1 ? 'ítem' : 'ítems'}`;
+
+            // Renderizar Lista
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center text-center p-6 text-gray-400 space-y-3">
+                        <i class="fa-solid fa-basket-shopping text-5xl text-gray-200"></i>
+                        <p class="text-sm font-medium">Tu carrito está vacío</p>
+                        <a href="#catalogo" onclick="toggleCart(false)" class="text-xs font-bold text-brand-600 hover:underline">Explorar catálogo</a>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = '';
+                cart.forEach(item => {
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'flex items-center gap-3 p-3 bg-white rounded-2xl border border-gray-100 shadow-sm';
+                    itemEl.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}" class="w-14 h-14 object-cover rounded-xl shrink-0">
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-bold text-xs text-gray-800 truncate">${item.name}</h4>
+                            <p class="text-xs text-brand-600 font-extrabold mt-0.5">${(item.price * item.qty).toFixed(2)} Bs.</p>
+                            
+                            <div class="flex items-center gap-2 mt-2">
+                                <div class="flex items-center border border-gray-200 rounded-lg overflow-hidden bg-gray-50">
+                                    <button onclick="updateQty('${item.id}', -1)" class="w-6 h-6 flex items-center justify-center text-xs text-gray-600 hover:bg-gray-200">-</button>
+                                    <span class="w-6 text-center text-xs font-bold">${item.qty}</span>
+                                    <button onclick="updateQty('${item.id}', 1)" class="w-6 h-6 flex items-center justify-center text-xs text-gray-600 hover:bg-gray-200">+</button>
+                                </div>
+                                <button onclick="removeFromCart('${item.id}')" class="text-gray-400 hover:text-rose-500 text-xs p-1" aria-label="Eliminar ítem">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(itemEl);
+                });
+            }
+
+            subtotalEl.innerText = `${totalPrice.toFixed(2)} Bs.`;
+            totalEl.innerText = `${totalPrice.toFixed(2)} Bs.`;
+        }
+
+        function toggleCart(open) {
+            const drawer = document.getElementById('cart-drawer');
+            const overlay = document.getElementById('cart-drawer-overlay');
+
+            if (open) {
+                overlay.classList.remove('opacity-0', 'pointer-events-none');
+                drawer.classList.remove('translate-x-full');
+            } else {
+                overlay.classList.add('opacity-0', 'pointer-events-none');
+                drawer.classList.add('translate-x-full');
+            }
+        }
+
+        function saveCartToStorage() {
+            localStorage.setItem('catajoma_cart', JSON.stringify(cart));
+        }
+
+        function loadCartFromStorage() {
+            const saved = localStorage.getItem('catajoma_cart');
+            if (saved) {
+                try {
+                    cart = JSON.parse(saved);
+                } catch (e) {
+                    cart = [];
+                }
+            }
+        }
+
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                showToast('Agrega al menos un producto para finalizar', 'warning');
+                return;
+            }
+
+            const nameInput = document.getElementById('customer-name').value.trim();
+            const notesInput = document.getElementById('customer-notes').value.trim();
+
+            const phone = "51967983926"; // Número internacional
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            // Construcción del mensaje estructurado y tabular
+            let msg = `*¡NUEVO PEDIDO EN CATAJOMA!* 🛍️✨\n\n`;
+            msg += `*Detalle de la compra:*\n`;
+            msg += `-------------------------------------------\n`;
+            
+            cart.forEach(item => {
+                const sub = (item.price * item.qty).toFixed(2);
+                msg += `• *${item.name}*\n  ${item.qty} x ${item.price} Bs. = *${sub} Bs.*\n`;
+            });
+
+            msg += `-------------------------------------------\n`;
+            msg += `*MONTO TOTAL FINAL: ${totalPrice.toFixed(2)} Bs.*\n\n`;
+
+            if (nameInput) {
+                msg += `👤 *Cliente:* ${nameInput}\n`;
+            }
+            if (notesInput) {
+                msg += `📍 *Ubicación/Nota:* ${notesInput}\n`;
+            }
+
+            msg += `\nQuedo a la espera de la confirmación para acordar el pago y la entrega. ¡Gracias!`;
+
+            // Codificar e iniciar la conversación en WhatsApp
+            const encodedMsg = encodeURIComponent(msg);
+            const waUrl = `https://wa.me/${phone}?text=${encodedMsg}`;
+            
+            window.open(waUrl, '_blank');
+        }
+
+        /* Toast de notificación de reemplazo */
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const msgEl = document.getElementById('toast-message');
+            const iconEl = document.getElementById('toast-icon');
+
+            msgEl.innerText = message;
+            
+            if (type === 'warning') {
+                iconEl.className = 'fa-solid fa-triangle-exclamation text-amber-400';
+            } else if (type === 'info') {
+                iconEl.className = 'fa-solid fa-circle-info text-blue-400';
+            } else {
+                iconEl.className = 'fa-solid fa-circle-check text-emerald-400';
+            }
+
+            toast.classList.remove('opacity-0', 'translate-x-72', 'pointer-events-none');
+            
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-x-72', 'pointer-events-none');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
